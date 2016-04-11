@@ -12,7 +12,7 @@ import Blocos.Bloco;
  *
  * @author Tiago
  */
-public abstract class Picareta extends Ferramenta{
+public abstract class Picareta extends Ferramenta implements Encantavel,Melhoravel{
     private static int totalMinerado=0;
     
     
