@@ -6,13 +6,13 @@ import Data.Data;
 
 public class Mapa {
     Bloco [][]grid;
-    int size=20;
+    static int size=20;
     int playerX,playerY;
     Data creationTime;
     String name;
 
 
-void changeMapSize( int temp)
+public static void changeMapSize(final int temp)
 {
     if (temp>8 && temp<40)
     size=temp;
@@ -33,28 +33,28 @@ int i,j,letra;
          {   
     switch (str.substring(letra)) {
         case "f":
-            grid[i][j].init("ferro");
+            grid[i][j]=new Bloco("ferro");
             break;
         case "o":
-            grid[i][j].init("ouro");
+            grid[i][j]=new Bloco("ouro");
             break;
         case "d":
-            grid[i][j].init("diamante");
+            grid[i][j]=new Bloco("diamante");
             break;
         case "i":
-            grid[i][j].init("ar");//se houver mais de um i todos seram vazio mas o ultimo sera o inicio
+            grid[i][j]=new Bloco("ar");//se houver mais de um i todos seram vazio mas o ultimo sera o inicio
             playerX=i;
             playerY=j;
             break;
         default:
-            grid[i][j].init("pedra");
+            grid[i][j]=new Bloco("pedra");
             break;
     }
              letra++;     
          }
- grid[playerX][playerY].init("ar");//garante que nao haja bloco no inicio caso ele nao seja especificado; 
+ grid[playerX][playerY]=new Bloco("ar");//garante que nao haja bloco no inicio caso ele nao seja especificado; 
 }
-Mapa( Data  data )
+public Mapa(final Data  data )
 {
  int i,j;
  grid=new Bloco[size][size];
@@ -62,8 +62,8 @@ Mapa( Data  data )
      
  for (j=1;j<size;j++)
      for (i=1;i<size;i++)
-     grid[i][j].init("pedra");
- grid[0][0].init("ar");
+     grid[i][j]=new Bloco("pedra");
+ grid[0][0]=new Bloco("ar");
  playerX=0;
  playerY=0;
 }
@@ -124,7 +124,7 @@ public Bloco getBloco(char op)
       return (grid[x][y]);//retorna a nova
       }   
 }
-void movePlayer(char op)
+public void movePlayer(char op)
 {
       int x=0,y=0;
       switch (op)

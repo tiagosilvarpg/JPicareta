@@ -14,13 +14,13 @@ public class Spell {
     String nome,descricao;
     int duracao;
     
-    Spell()
+    public Spell()
     {
         duracao=100;
         nome="resistente";
         descricao="tem uma chance de nao gastar quando usada";
     }
-    Spell(Spell original)
+    public Spell(final Spell original)
     {
         this.duracao=original.duracao;
         this.nome=original.nome;

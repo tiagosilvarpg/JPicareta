@@ -17,19 +17,17 @@ import java.util.Random;
  */
 public class PicaretaDiamante extends Picareta{
     private static int durabilidadeMaxima =1561;
-    private static int forca=10;
+    private static int forcaBase=10;
     
-    int forcaBase=10;
     //CONSTRUTOR
-    PicaretaDiamante()
+    public PicaretaDiamante()
     {
         durabilidade=durabilidadeMaxima;
         forca=forcaBase;
     }
-    PicaretaDiamante( PicaretaDiamante rValue)
+    public PicaretaDiamante( PicaretaDiamante rValue)
     {
-        durabilidade=rValue.durabilidade;
-        forca=rValue.forca;
+        super((Picareta)rValue);
     }
     
     @Override
@@ -52,7 +50,7 @@ public class PicaretaDiamante extends Picareta{
         return output;
     }
 
-    boolean equals( PicaretaDiamante rValue)
+    boolean equals(final  PicaretaDiamante rValue)
     {
            
         if (durabilidade==rValue.durabilidade)
@@ -62,7 +60,7 @@ public class PicaretaDiamante extends Picareta{
     }
     
     @Override
-    public void consertar( Ferramenta  rValue)
+    public void consertar(final  Ferramenta  rValue)
     {    
         
         if (rValue instanceof PicaretaDiamante)
@@ -75,7 +73,7 @@ public class PicaretaDiamante extends Picareta{
         else System.out.println("precisa de uma picareta de diamante para isso");
     }
     @Override
-    void minerar(Bloco target)
+    void minerar(final Bloco target)
     {
         Spell spellTemp;
         Random random=new Random();
@@ -103,6 +101,68 @@ public class PicaretaDiamante extends Picareta{
             }
         }
         else System.out.println("essa picareta é muito fraca pra isso");    
+    }
+    public boolean encantar()
+    {
+                
+        Spell temp[]= new Spell[feitico.length+1];
+        System.arraycopy(feitico, 0, temp, 0, feitico.length);
+        temp[temp.length]=new Spell();
+        feitico=temp;
+        return true;
+    }
+    public boolean encantar(final Spell novo)
+    {
+        if (novo==null) return false;
+        
+        Spell temp[]= new Spell[feitico.length+1];
+        System.arraycopy(feitico, 0, temp, 0, feitico.length);
+        temp[temp.length]=novo;
+        feitico=temp;
+        return true;
+    }
+    @Override
+    public boolean remover(final Spell spellTemp)//remove um feitico especifico do array trabalha em conjunto com o hasspell pra retornar o fetico correto
+    { 
+        boolean flag=false;  
+        //primeiro checa se existe e remove caso exista
+        for (int i=0;i<feitico.length;i++)
+            if ((feitico[i])==spellTemp)
+            {
+                flag=true;
+                feitico[i]=feitico[feitico.length-1];
+            }
+        //se removeu cria um novo vetor
+        if (flag==true)
+        {
+            Spell temp[]= new Spell[feitico.length-1];
+            System.arraycopy(feitico, 0, temp, 0, feitico.length-1);
+            feitico=temp;
+            return true;
+        }else return false;
+
+    }
+    @Override
+    public Spell hasSpell(final String nome)//retorna o com menos duracao restante;
+    {
+       int i,escolhido=-1,duracao=-1;
+       for(i=0;i<feitico.length;i++)
+       if (nome.equals(feitico[i].getNome()))
+       {
+           if (duracao==-1)//se nao tiver achado nenhum guarda esse
+            {
+                duracao=feitico[i].getDuracao();
+                escolhido=i;
+            }
+           else if (feitico[i].getDuracao()<duracao)//se ja tiver achado checa se esse é menor
+           {
+               escolhido=i;
+               duracao=feitico[i].getDuracao();
+           }
+               
+       }
+       if (escolhido==-1) return null;
+       else return (feitico[escolhido]);
     }
 
     

@@ -15,18 +15,17 @@ import java.util.Random;
  *
  * @author Tiago
  */
-public class PicaretaPedra extends Picareta{
+abstract public class PicaretaPedra extends Picareta{
     private static int durabilidadeMaxima =161;
-    private static int forca=4;
+    private static int forcaBase=4;
     
-    int forcaBase=10;
     //CONSTRUTOR
-    PicaretaPedra()
+    public PicaretaPedra()
     {
         durabilidade=durabilidadeMaxima;
         forca=forcaBase;
     }
-    PicaretaPedra( PicaretaPedra rValue)
+    public PicaretaPedra(final PicaretaPedra rValue)
     {
         durabilidade=rValue.durabilidade;
         forca=rValue.forca;
@@ -52,7 +51,7 @@ public class PicaretaPedra extends Picareta{
         return output;
     }
 
-    boolean equals( PicaretaPedra rValue)
+    boolean equals(final PicaretaPedra rValue)
     {
            
         if (durabilidade==rValue.durabilidade)
@@ -62,7 +61,7 @@ public class PicaretaPedra extends Picareta{
     }
     
     @Override
-    public void consertar( Ferramenta  rValue)
+    public void consertar(final  Ferramenta  rValue)
     {    
         
         if (rValue instanceof PicaretaPedra)
@@ -75,7 +74,7 @@ public class PicaretaPedra extends Picareta{
         else System.out.println("precisa de uma picareta de pedra para isso");
     }
     @Override
-    void minerar(Bloco target)
+    void minerar(final Bloco target)
     {
         Spell spellTemp;
         Random random=new Random();

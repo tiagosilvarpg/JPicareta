@@ -14,17 +14,17 @@ public class Bloco {
     int resistencia,cor;
     String material;
     
-    Bloco(String str)
+    public Bloco(String str)
     {
      material=str;
      init(material);
     }
-    Bloco()
+    public Bloco()
     {
      material="pedra";
      init(material);
     }
-    Bloco( Bloco original)
+    public Bloco(final  Bloco original)
     {
      this.material=original.material;
      this.resistencia=original.resistencia;
@@ -48,39 +48,39 @@ public class Bloco {
     }   
     public void init( String  mtr)
     {
-         if (mtr=="ouro")
+        
+
+        if ("ouro".equals(mtr))
          { 
            material=mtr;
            resistencia= 40;
            cor=6;
          }
-         if (mtr=="ar")
+         if ("ar".equals(mtr))
          { 
            material=mtr;
            resistencia= 0;
            cor=15;
          }
-         if (mtr=="pedra")
-         { material=mtr;
-           resistencia=10;
-           cor=8;
-         }
-         if (mtr=="ferro")
+         if ("ferro".equals(mtr))
          { material=mtr;
            resistencia= 20;
            cor=12;
          }
-         if (mtr=="diamante")
+         if ("diamante".equals(mtr))
          { material=mtr;
            resistencia= 80;
            cor=9;
-         }                                  
+         }
+         else         
+         { material=mtr;
+           resistencia=10;
+           cor=8;
+         }
     }
     public boolean isAir()
     {
-         if (material=="ar")
-         return true;
-         return false;
+         return "ar".equals(material);
     }
     // SOBRECARGA
     @Override
@@ -103,12 +103,10 @@ public class Bloco {
          //textcolor(15);
          return output;
     }
-    public boolean equals( Bloco toCompare)
+    public boolean equals(final  Bloco toCompare)
     {
          if (!material.equals(toCompare.material)) return false;
-         if (resistencia != toCompare.resistencia) return false;
-         return true;
-
+         return resistencia == toCompare.resistencia;
     }
 
 
