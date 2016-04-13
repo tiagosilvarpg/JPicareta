@@ -53,14 +53,16 @@ public abstract class Picareta extends Ferramenta implements Encantavel{
     public String toString() {
         return ("voce usou a picareta "+Picareta.totalMinerado+" vezes");
     }
-    // metodos da interface
-
-    /**
-     *
-     * @param nome
-     * @return
-     */
-
+    @Override
+    public boolean encantar()
+    {
+                
+        Spell temp[]= new Spell[feitico.length+1];
+        System.arraycopy(feitico, 0, temp, 0, feitico.length);
+        temp[temp.length]=new Spell();
+        feitico=temp;
+        return true;
+    }
     @Override
     public boolean remover(final String nome)//remove todas as ocorrencias com o mesmo nome
     {  
@@ -88,12 +90,13 @@ public abstract class Picareta extends Ferramenta implements Encantavel{
 
     }
    
+    @Override
     public Spell hasSpell(final String nome)
     {
-       int i;
-       for(i=0;i<feitico.length;i++)
-       if (nome.equals(feitico[i].getNome()))
-          return (feitico[i]);
+        int i;
+        for(i=0;i<feitico.length;i++)
+            if (nome.equals(feitico[i].getNome()))
+                return (feitico[i]);
        return null;
     }
 

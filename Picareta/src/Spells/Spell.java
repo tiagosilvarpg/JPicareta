@@ -33,17 +33,14 @@ public class Spell {
          duracao-=1;
          return true;
     }
-    /*
-    ostream & operator<<(ostream & output,const Spell & feitico)
+    
+    @Override
+    public String toString()
     {
-        output <<feitico.nome
-               <<"("
-               <<feitico.duracao
-               <<")-\""
-               <<feitico.descricao
-               <<"\"";
+        String output;
+        output =(nome+"("+duracao+")\""+descricao+"\"");
         return output;
-    }*/
+    }
     public String getNome()
     {
         return nome;

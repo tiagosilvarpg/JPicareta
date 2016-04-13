@@ -14,15 +14,42 @@ public class Bloco {
     int resistencia,cor;
     String material;
     
-    public Bloco(String str)
+    public Bloco(String material)
     {
-     material=str;
-     init(material);
+     super();
+     if (null != material)
+         switch (material) {
+            
+            case "ar":
+                this.material=material;
+                resistencia=0;
+                cor=15;
+                break;
+            case "ferro":
+                this.material=material;
+                resistencia= 20;
+                cor=12;
+                break;
+            case "ouro":
+                this.material=material;
+                resistencia= 40;
+                cor=6;
+                break;
+            case "diamante":
+                this.material=material;
+                resistencia= 80;
+                cor=9;
+                break;
+            default:
+                this.material="pedra";
+                resistencia=10;
+                cor=8;
+                break;
+        }
     }
     public Bloco()
     {
-     material="pedra";
-     init(material);
+     this("pedra");
     }
     public Bloco(final  Bloco original)
     {
@@ -35,7 +62,9 @@ public class Bloco {
           if (resistencia!=0)
           {
              //Sleep(resistencia*200/forca);
-             this.init("ar");         
+             this.material="ar";
+             resistencia=0;
+             cor=15;        
              return true;
           }
           else 
@@ -46,38 +75,6 @@ public class Bloco {
     {
         return resistencia;
     }   
-    public void init( String  mtr)
-    {
-        
-
-        if ("ouro".equals(mtr))
-         { 
-           material=mtr;
-           resistencia= 40;
-           cor=6;
-         }
-         if ("ar".equals(mtr))
-         { 
-           material=mtr;
-           resistencia= 0;
-           cor=15;
-         }
-         if ("ferro".equals(mtr))
-         { material=mtr;
-           resistencia= 20;
-           cor=12;
-         }
-         if ("diamante".equals(mtr))
-         { material=mtr;
-           resistencia= 80;
-           cor=9;
-         }
-         else         
-         { material=mtr;
-           resistencia=10;
-           cor=8;
-         }
-    }
     public boolean isAir()
     {
          return "ar".equals(material);
@@ -92,13 +89,13 @@ public class Bloco {
          {
             //textcolor(cor);
             //cout<<(char)178;//imprime o simbolo 178 da tabela ascii
-             output=(material.substring(0,0));
+             output=material.substring(0,1);
          }
          else
          {
              //textcolor(0);
              //cout<<(char)176;//imprime o simbolo 176 da tabela ascii
-             output=(" ");
+             output=("_");
          }
          //textcolor(15);
          return output;

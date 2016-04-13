@@ -21,7 +21,7 @@ public abstract class Ferramenta {
     Ferramenta()
     {
         super();
-        feitico=null;
+        feitico=new Spell[0];
     }
     Ferramenta( final Ferramenta rValue)
     {

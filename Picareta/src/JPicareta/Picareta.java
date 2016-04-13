@@ -6,6 +6,7 @@
 
 package JPicareta;
 
+import Blocos.Bloco;
 import Data.Data;
 import Mapa.Mapa;
 import Spells.Spell;
@@ -27,38 +28,31 @@ public class Picareta {
     Mapa mundo;
     hoje = new  Data(23,03,2016);
     Scanner input=new Scanner(System.in);
-    char op='1',charArray[] = {'s'};
-    String str;
-    int selecionada=0,inputSize=0;
+    char op='1';
+    String str="iiipppppppppooooooooooo";
+    int selecionada=0;
     Ferramenta ferramentas[]=new Ferramenta[3];
-    
+    Bloco bloco = new Bloco("ouro");
+    ferramentas[0]=new PicaretaDiamante();
+    System.out.println(bloco);
+    System.out.println(ferramentas[0]);
     System.out.println("insira uma cadeia de blocos (ouro=0,pedra=p,ferro=f,diamante=d,inicio=i)");
-    str=input.next();
     mundo=new  Mapa(str,hoje);
-    
+        System.out.println("mundo");
     ferramentas[0]=new PicaretaDiamante();
     ferramentas[1]=new PicaretaDiamante((PicaretaDiamante)ferramentas[0]);
     ferramentas[2]=new PicaretaDiamante();
     while (op!='x')
     {
     
-    //mundo.refresh();
-    System.out.println(ferramentas[selecionada]);
+    System.out.println(mundo);    
+    System.out.print(ferramentas[selecionada]);
     System.out.println("mover(a,s,d,w),encantar(e),consertar(c),sair(x),selecionar picareta(1,2,3)\n:");
-    /* essa parte é treta, para funcionar como em c++ onde ele tratava um palavra como varias entradas consecutivar de char
-    guarda a palavra e usa as letras aos poucos ate nao ter mais nenhuma ai ele le denovo;
-    */
-    if (inputSize==0)
-    {
-      charArray=input.next().toCharArray();
-      inputSize=charArray.length;
-    }
-    else
-    {
-        op=charArray[charArray.length-inputSize];
-        inputSize--;
-    }
-    //op=getch();
+    // essa parte é treta, para funcionar como em c++ onde ele tratava um palavra como varias entradas consecutivar de char
+    //guarda a palavra e usa as letras aos poucos ate nao ter mais nenhuma ai ele le denovo;
+    
+    
+    op=input.next().toCharArray()[0];
  
     if ((op=='d')||(op=='a')||(op=='w')||(op=='s'))
     {

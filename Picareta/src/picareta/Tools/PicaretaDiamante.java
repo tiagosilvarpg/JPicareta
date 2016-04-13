@@ -38,14 +38,17 @@ public class PicaretaDiamante extends Picareta{
         output ="Picareta de Diamante,"
                +durabilidade
                +"/"
-               +durabilidadeMaxima;
+               +durabilidadeMaxima
+               +"\n";
 
+        
         for ( i=0; i<feitico.length; i++ )
         {
-            output += "   spell["
+            output +="#spell["
                    +i
                    +"]="
-                   +feitico[i];  
+                   +feitico[i]
+                   +"\n";  
         }
         return output;
     }
@@ -102,22 +105,14 @@ public class PicaretaDiamante extends Picareta{
         }
         else System.out.println("essa picareta é muito fraca pra isso");    
     }
-    public boolean encantar()
-    {
-                
-        Spell temp[]= new Spell[feitico.length+1];
-        System.arraycopy(feitico, 0, temp, 0, feitico.length);
-        temp[temp.length]=new Spell();
-        feitico=temp;
-        return true;
-    }
+    @Override
     public boolean encantar(final Spell novo)
     {
         if (novo==null) return false;
         
         Spell temp[]= new Spell[feitico.length+1];
         System.arraycopy(feitico, 0, temp, 0, feitico.length);
-        temp[temp.length]=novo;
+        temp[temp.length-1]=novo;
         feitico=temp;
         return true;
     }
