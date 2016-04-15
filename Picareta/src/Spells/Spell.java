@@ -10,7 +10,7 @@ package Spells;
  *
  * @author Tiago
  */
-public class Spell {
+public class Spell{
     String nome,descricao;
     int duracao;
     
@@ -26,6 +26,12 @@ public class Spell {
         this.nome=original.nome;
         this.descricao=original.descricao;
     }
+    public Spell(final String nome,String descricao,int duracao)
+    {
+        this.duracao=duracao;
+        this.nome=nome;
+        this.descricao=descricao;
+    }
     
     public boolean usar()
     {    if (duracao==0)
@@ -33,7 +39,7 @@ public class Spell {
          duracao-=1;
          return true;
     }
-    
+
     @Override
     public String toString()
     {
@@ -48,5 +54,12 @@ public class Spell {
     public int getDuracao()
     {
         return duracao;
+    }
+    public boolean equals(Spell other )
+    {
+        if (nome.equals(other.nome))
+        if (descricao.equals(other.descricao))
+        return duracao==other.duracao;
+        return false;
     }
 }

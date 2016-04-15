@@ -19,7 +19,6 @@ public class PicaretaDiamante extends Picareta{
     private static int durabilidadeMaxima =1561;
     private static int forcaBase=10;
     
-    //CONSTRUTOR
     public PicaretaDiamante()
     {
         durabilidade=durabilidadeMaxima;
@@ -27,7 +26,7 @@ public class PicaretaDiamante extends Picareta{
     }
     public PicaretaDiamante( PicaretaDiamante rValue)
     {
-        super((Picareta)rValue);
+        super((Picareta)rValue);        
     }
     
     @Override
@@ -119,23 +118,19 @@ public class PicaretaDiamante extends Picareta{
     @Override
     public boolean remover(final Spell spellTemp)//remove um feitico especifico do array trabalha em conjunto com o hasspell pra retornar o fetico correto
     { 
-        boolean flag=false;  
-        //primeiro checa se existe e remove caso exista
+        boolean flag=false;
         for (int i=0;i<feitico.length;i++)
-            if ((feitico[i])==spellTemp)
-            {
-                flag=true;
-                feitico[i]=feitico[feitico.length-1];
-            }
-        //se removeu cria um novo vetor
-        if (flag==true)
+        {
+            if (flag) feitico[i-1]=feitico[i];//se ja houver encontrado vai movendo os elementos para esquerda
+            else if (feitico[i]==spellTemp)flag=true;//caso contrario procura o elemento 
+        }
+        if (flag)//se removeu cria um novo vetor
         {
             Spell temp[]= new Spell[feitico.length-1];
-            System.arraycopy(feitico, 0, temp, 0, feitico.length-1);
+            System.arraycopy(feitico, 0, temp, 0,feitico.length-1);
             feitico=temp;
-            return true;
-        }else return false;
-
+        }
+        return flag;
     }
     @Override
     public Spell hasSpell(final String nome)//retorna o com menos duracao restante;

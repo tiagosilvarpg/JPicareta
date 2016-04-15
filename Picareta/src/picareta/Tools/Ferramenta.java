@@ -7,7 +7,6 @@
 package picareta.Tools;
 
 import Blocos.Bloco;
-import Spells.Spell;
 
 /**
  *
@@ -15,19 +14,14 @@ import Spells.Spell;
  */
 public abstract class Ferramenta {
     protected int durabilidade;
-    protected Spell []feitico;    
-    
-    
     Ferramenta()
     {
         super();
-        feitico=new Spell[0];
+        durabilidade=0;
     }
     Ferramenta( final Ferramenta rValue)
     {
         this();
-        if (rValue.feitico!=null)
-            this.feitico=rValue.feitico.clone();
         this.durabilidade=rValue.durabilidade;
     }
     public abstract void consertar(final Ferramenta tool);
