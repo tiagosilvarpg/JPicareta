@@ -143,5 +143,11 @@ public class PicaretaPedra extends Picareta{
        }
        if (escolhido>=0) return (feitico[escolhido]);
        return null;
+    }
+    @Override
+    public void upgrade() {
+        if (forca<forcaBase+3)
+            forca+=1;
+            
     }    
 }

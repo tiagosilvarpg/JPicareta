@@ -74,9 +74,7 @@ public String toString(){
          for (i=0;i<size;i++)
         {    if (i==playerX && j==playerY)
              {
-                //textcolor(15);
-                 output+="T";
-                //textcolor(15);
+                output+="T";
              }
              else output+=(grid[i][j]);
 
@@ -116,14 +114,13 @@ public Bloco getBloco(char op)
            break;
            }
       }
-      if (x>=size || x<0 || y<0 ||y>=size)
+      try
       {
-       return grid[playerX][playerY];//retorna a atual se a nova nao for valida
+        return (grid[x][y]);
       }
-      else
-      {
-      return (grid[x][y]);//retorna a nova
-      }   
+      catch(ArrayIndexOutOfBoundsException ex){
+        return grid[playerX][playerY];
+      }
 }
 public void movePlayer(char op)
 {

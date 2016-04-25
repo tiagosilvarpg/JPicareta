@@ -11,5 +11,5 @@ package picareta.Tools;
  * @author Tiago
  */
 public interface Melhoravel {
-//pertmite melhorar uma picareta alem de sua capacidade normal de forma permanente
+    public void upgrade();
 }

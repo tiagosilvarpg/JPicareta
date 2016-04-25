@@ -19,16 +19,18 @@ public class Data {
         this.month=month;
     else
         this.month=1;
-    this.year=year;    
-    day=checkDay(day);
+    this.year=year;
+    
+    this.day=checkDay(day);
     }
    public int checkDay(int dia)
-{
+    {
     int diasPorMes[]={0,31,28,31,30,31,30,31,31,30,31,30,31};
     if (dia>0 && dia<diasPorMes[month])
         return dia;
-    else return 1;    
-}
+    else 
+        return 1;    
+    }
 
 
 

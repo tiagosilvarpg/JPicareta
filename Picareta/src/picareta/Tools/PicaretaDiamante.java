@@ -155,5 +155,11 @@ public class PicaretaDiamante extends Picareta{
        else return (feitico[escolhido]);
     }
 
+    @Override
+    public void upgrade() {
+        if (forca<forcaBase+5)
+            forca+=1;
+            
+    }
     
 }

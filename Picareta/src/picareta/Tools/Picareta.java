@@ -13,7 +13,7 @@ import Spells.Spell;
  *
  * @author Tiago
  */
-public abstract class Picareta extends Ferramenta implements Encantavel{
+public abstract class Picareta extends Ferramenta implements Encantavel,Melhoravel{
     private static int totalMinerado=0;
     protected int forca;
     protected Spell []feitico; 
@@ -104,6 +104,8 @@ public abstract class Picareta extends Ferramenta implements Encantavel{
                 return (feitico[i]);
        return null;
     }
+
+    
 
     
 }
