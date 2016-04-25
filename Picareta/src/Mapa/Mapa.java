@@ -6,55 +6,53 @@ import Data.Data;
 
 public class Mapa {
     Bloco [][]grid;
-    int size=20;
+    static int size=20;
     int playerX,playerY;
     Data creationTime;
     String name;
-
-
-void changeMapSize( int temp)
-{
-    if (temp>8 && temp<40)
-    size=temp;
-}
 
 public Mapa( String  str, Data  data )
 {
 int i,j,letra;
  //inicializar
- playerX=0;
- playerY=0;
- //alocacao dinamica
- grid=new Bloco[size][size];
- letra=0; 
- for (j=0;j<size;j++)
-      for (i=0;i<size;i++)
-      if ((int)letra<str.length())
-         {   
-    switch (str.substring(letra)) {
-        case "f":
-            grid[i][j].init("ferro");
-            break;
-        case "o":
-            grid[i][j].init("ouro");
-            break;
-        case "d":
-            grid[i][j].init("diamante");
-            break;
-        case "i":
-            grid[i][j].init("ar");//se houver mais de um i todos seram vazio mas o ultimo sera o inicio
-            playerX=i;
-            playerY=j;
-            break;
-        default:
-            grid[i][j].init("pedra");
-            break;
-    }
-             letra++;     
-         }
- grid[playerX][playerY].init("ar");//garante que nao haja bloco no inicio caso ele nao seja especificado; 
+playerX=0;
+playerY=0;
+//alocacao dinamica
+grid=new Bloco[size][size];
+letra=0; 
+for (j=0;j<size;j++)
+{
+    for (i=0;i<size;i++)
+        if (letra<str.length())
+        {   
+            switch (str.toCharArray()[letra]) 
+            {
+                case 'f':
+                    grid[i][j]=new Bloco("ferro");
+                    break;
+                case 'o':
+                    grid[i][j]=new Bloco("ouro");
+                    break;
+                case 'd':
+                    grid[i][j]=new Bloco("diamante");
+                    break;
+                case 'i':
+                    grid[i][j]=new Bloco("ar");//se houver mais de um i todos serao vazio mas o ultimo sera o inicio
+                    playerX=i;
+                    playerY=j;
+                    break;
+                default:
+                    grid[i][j]=new Bloco("pedra");
+                    break;
+            }
+        letra++;     
+        }
+        else grid[i][j]=new Bloco("pedra");
 }
-Mapa( Data  data )
+grid[playerX][playerY]=new Bloco("ar");//garante que nao haja bloco no inicio caso ele nao seja especificado;
+
+}
+public Mapa(final Data  data )
 {
  int i,j;
  grid=new Bloco[size][size];
@@ -62,69 +60,72 @@ Mapa( Data  data )
      
  for (j=1;j<size;j++)
      for (i=1;i<size;i++)
-     grid[i][j].init("pedra");
- grid[0][0].init("ar");
+     grid[i][j]=new Bloco("pedra");
+ grid[0][0]=new Bloco("ar");
  playerX=0;
  playerY=0;
 }
-public void refresh()
-{int i,j;
- for (j=0;j<size;j++)
- {
-     for (i=0;i<size;i++)
-     {    if (i==playerX && j==playerY)
-          {
-             //textcolor(15);
-              System.out.println("\2");
-             //textcolor(15);
-          }
-          else System.out.print(grid[i][j]);
-          
+@Override
+public String toString(){
+     int i,j;
+     String output="";
+     for (j=0;j<size;j++)
+     {
+         for (i=0;i<size;i++)
+        {    if (i==playerX && j==playerY)
+             {
+                output+="T";
+             }
+             else output+=(grid[i][j]);
+
+        }
+         output+="\n";
      }
-     System.out.println("");
- }
-    System.out.println("");
+    return output;
+}
+public static void changeMapSize(final int temp)
+{
+    if (temp>8 && temp<40)
+    size=temp;
 }
 public Bloco getBloco(char op)
 {
-      int x=0,y=0;
+      int x=playerX,y=playerY;
       switch (op)
       {
       case 'a':
            {
-           y=playerY;
            x=playerX-1;    
            break;
            }
       case 's':
            {
-           y=playerY+1;
-           x=playerX;              
+           y=playerY+1;              
            break;
            }
       case 'd':
            {
-           y=playerY;
            x=playerX+1;    
            break;
            }
       case 'w':
            {
-           y=playerY-1;
-           x=playerX;     
+           y=playerY-1;     
            break;
            }
       }
-      if (x>=size || x<0 || y<0 ||y>=size)
+      /*
+        modificado aqui
+      */
+      try
       {
-       return grid[playerX][playerY];//retorna a atual se a nova nao for valida
+        return (grid[x][y]);
       }
-      else
-      {
-      return (grid[x][y]);//retorna a nova
-      }   
+      catch(ArrayIndexOutOfBoundsException ex){
+        return grid[playerX][playerY];
+      }
 }
-void movePlayer(char op)
+public void movePlayer(char op)
 {
       int x=0,y=0;
       switch (op)
@@ -154,18 +155,20 @@ void movePlayer(char op)
            break;
            }
       }
-      if (x<size && x>=0 && y>=0 && y<size)
-      {
-         if (grid[x][y].isAir())
+      /*
+        modificado aqui
+      */
+      try{
+          if (grid[x][y].isAir())
           { 
               playerY=y;
               playerX=x;
           }
-          
       }
-      
+      catch (ArrayIndexOutOfBoundsException a){
+          System.out.println("posicao invalida");
+      }       
 }
-
 int getPlayerX()
 {
 return playerX;
