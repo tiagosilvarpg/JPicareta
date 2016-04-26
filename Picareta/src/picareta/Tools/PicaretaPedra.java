@@ -26,7 +26,7 @@ public class PicaretaPedra extends Picareta{
     }
     public PicaretaPedra(final PicaretaPedra rValue)
     {
-        super((Picareta)rValue);
+        super(rValue);
     }
     @Override
     public String toString()

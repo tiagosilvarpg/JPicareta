@@ -22,6 +22,7 @@ public abstract class Picareta extends Ferramenta implements Encantavel,Melhorav
             
     public Picareta()
     {
+        super();
         this.forca=0;
         this.feitico=new Spell[0];
     }
@@ -37,8 +38,8 @@ public abstract class Picareta extends Ferramenta implements Encantavel,Melhorav
     
     boolean equals(final Picareta rValue){
         if (durabilidade!=rValue.durabilidade)
-        if (this.forca==rValue.forca)
-            return true;
+            if (this.forca==rValue.forca)
+                return true;
         return false;
     }
 
@@ -67,7 +68,6 @@ public abstract class Picareta extends Ferramenta implements Encantavel,Melhorav
         feitico=temp;
         return true;
     }
-    
     @Override
     public boolean remover(final String nome)//remove todas as ocorrencias com o mesmo nome
     {  

@@ -21,12 +21,13 @@ public class PicaretaDiamante extends Picareta{
     
     public PicaretaDiamante()
     {
+        super();
         durabilidade=durabilidadeMaxima;
         forca=forcaBase;
     }
     public PicaretaDiamante( PicaretaDiamante rValue)
     {
-        super((Picareta)rValue);        
+        super(rValue);        
     }
     
     @Override
@@ -151,8 +152,9 @@ public class PicaretaDiamante extends Picareta{
            }
                
        }
-       if (escolhido==-1) return null;
-       else return (feitico[escolhido]);
+        if (escolhido==-1) 
+            return null;
+        else return (feitico[escolhido]);
     }
 
     @Override

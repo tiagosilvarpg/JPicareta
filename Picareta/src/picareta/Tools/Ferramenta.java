@@ -21,17 +21,16 @@ public abstract class Ferramenta {
     }
     Ferramenta( final Ferramenta rValue)
     {
-        this();
+        super();
         this.durabilidade=rValue.durabilidade;
     }
     public abstract void consertar(final Ferramenta tool);
-    public abstract void usar(final Bloco target);    
+    public abstract void usar(final Bloco target);
+    
     public int compareTo(final Ferramenta other) {
-        // return this.id - otherStudent.id ; //result of this operation can overflow
         if (this.durabilidade==other.durabilidade) return 0;
         if (this.durabilidade>other.durabilidade) return 1;
         else return -1;
-
      }
 
 }
