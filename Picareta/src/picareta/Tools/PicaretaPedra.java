@@ -20,6 +20,7 @@ public class PicaretaPedra extends Picareta{
     private static int forcaBase=6;
     public PicaretaPedra()
     {
+        super();
         durabilidade=durabilidadeMaxima;
         forca=forcaBase;
     }
@@ -27,7 +28,6 @@ public class PicaretaPedra extends Picareta{
     {
         super((Picareta)rValue);
     }
-    
     @Override
     public String toString()
     {
@@ -141,8 +141,9 @@ public class PicaretaPedra extends Picareta{
                 duracao=feitico[i].getDuracao();                
             }               
        }
-       if (escolhido>=0) return (feitico[escolhido]);
-       return null;
+        if (escolhido>=0) 
+            return (feitico[escolhido]);
+        return null;
     }
     @Override
     public void upgrade() {
